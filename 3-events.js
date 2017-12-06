@@ -118,3 +118,42 @@ box.addEventListener('mouseout', runEvent) // Any inner elements
 box.addEventListener('mousemove', runEvent) // Any inner elements
 
 // KEYBOARD AND INPUT EVENTS ///////////////////////////////////////////////////
+
+let itemInput = document.querySelector('input[type="text"]')
+let form = document.querySelector('form')
+
+itemInput.addEventListener('keydown', runEvent2)
+itemInput.addEventListener('keyup', runEvent2)
+itemInput.addEventListener('keypress', runEvent2)
+
+itemInput.addEventListener('focus', runEvent2)
+itemInput.addEventListener('blur', runEvent2)
+
+itemInput.addEventListener('cut', runEvent2)
+itemInput.addEventListener('copy', runEvent2)
+itemInput.addEventListener('paste', runEvent2)
+
+itemInput.addEventListener('input', runEvent2)
+
+function runEvent2(e) {
+  console.log('Event Type: ' + e.type)
+  console.log('Target Value: ' + e.target.value)
+  document.getElementById('output').innerHTML = e.target.value
+  if (e.type == 'cut') {
+    document.body.style.display = 'none'
+  }
+}
+
+let select = document.querySelector('select')
+select.addEventListener('change', runEvent3)
+select.addEventListener('input', runEvent3)
+
+let submit = document.querySelector('input[type="submit"]')
+form.addEventListener('submit', runEvent3) // must call this e.preventDefault on the form element, not the submit button
+
+function runEvent3(e) {
+  e.preventDefault()
+  console.log('Event: ' + e)
+  console.log('Event type: ' + e.type)
+  console.log('select value: ' + e.target.value)
+}
