@@ -26,6 +26,7 @@ let button2 = document
 let button3 = document
   .getElementById('button3')
   .addEventListener('click', buttonClick)
+console.groupEnd('Everything Before')
 
 function buttonClick(e) {
   // Named functions are much more robust as they're hoisted to the global scope
@@ -37,7 +38,6 @@ function buttonClick(e) {
   document.getElementById('header-title').textContent =
     "Changed with 'click' event listener"
 
-  console.groupEnd('Everything before')
   console.groupCollapsed('Event props')
   console.log('e.target:', e.target) // What was clicked
   console.log('e.altKey:', e.altKey) // Modifiers
@@ -88,4 +88,33 @@ function buttonClick(e) {
   output.innerHTML = '<h3>Clicked element ID: ' + e.target.id + '</h3>'
 }
 
-// EVENT PARAMETER /////////////////////////////////////////////////////////////
+// OTHER MOUSE EVENTS //////////////////////////////////////////////////////////
+// ALL CLICK EVENTS
+let button4 = document.getElementById('button4')
+console.log(button4)
+
+button4.addEventListener('click', runEvent)
+button4.addEventListener('dblclick', runEvent)
+button4.addEventListener('mousedown', runEvent)
+button4.addEventListener('mouseup', runEvent)
+
+function runEvent(e) {
+  console.log('Event type: ' + e.type)
+  output.innerHTML =
+    '<h3>MouseX: ' + e.offsetX + '</h3><h3>MouseY: ' + e.offsetY + '</h3>'
+  document.body.style.backgroundColor =
+    'rgb(' + e.offsetX + ', ' + e.offsetY + ', 40)'
+}
+
+// MOUSE MOVEMENT
+let box = document.getElementById('box')
+console.log(box)
+
+box.addEventListener('mouseenter', runEvent) // Parent element only
+box.addEventListener('mouseover', runEvent) // Any inner elements
+
+box.addEventListener('mouseleave', runEvent) // Parent element only
+box.addEventListener('mouseout', runEvent) // Any inner elements
+box.addEventListener('mousemove', runEvent) // Any inner elements
+
+// KEYBOARD AND INPUT EVENTS ///////////////////////////////////////////////////
